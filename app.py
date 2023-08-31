@@ -111,3 +111,41 @@ def stock_presict():
 #ボタンで予測開始
 if st.button('予測する'):
     stock_presict()
+
+try:
+    df_stock = pandas_datareader.data.DataReader(stock_name, 'yahoo', '2021-01-01')
+
+    st.header(stock_name + "2022年１月５日から現在までの価格(USD")
+    st.write(df_stock)
+
+    st.header(stock_name + "終値と１４日間の平均(USD)")
+    df_stock['SMA'] = df_stock['Close'].rolling(window=14).mean()
+    df_stock2 = df_stock[['Close', 'SMA']]
+    st.line_chart(df_stock2)
+
+    st.header(stock_name + "値動き(USD)")
+    df_stock['change'] = (((df_stock['Close'] - df_stock['Open'])) / (df_stock['Open']) * 100)
+    st.line_chart(df_stock['change'].tail(100))
+
+    fig = go.Figure(
+        data=[go.Candlestick(
+            x=df_stock.index,
+            open=df_stock['Open'],
+            high=df_stock['High'],
+            low=df_stock['Low'],
+            close=df_stock['Close'],
+            increasing_line_color='green',
+            decreasing_line_color='red',
+
+        df_stock3=df_stock[['Close', 'Predict']]
+        st.line_chart(df_stock3)
+
+    # ボタンで予測開始
+    if st.button('予測する'):
+        stock_presict()
+
+except:
+    st.error(
+        "エラーメッセージ"
+    )
+st.write('Copyright @ 2021 Tomoyuki Yoshizawa. ALLRights Reserver.')
