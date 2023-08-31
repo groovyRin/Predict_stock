@@ -136,6 +136,9 @@ try:
             close=df_stock['Close'],
             increasing_line_color='green',
             decreasing_line_color='red',
+            )
+        ]
+    )
 
         df_stock3=df_stock[['Close', 'Predict']]
         st.line_chart(df_stock3)
