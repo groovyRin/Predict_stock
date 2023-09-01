@@ -1,5 +1,5 @@
 altair
-
+mplfinance
 numpy
 pandas
 pandas-datareader
